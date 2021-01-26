@@ -1,7 +1,8 @@
 import React from 'react';
-import styles from './form.module.css';
-import { Formik, Form, useField, useFormik, useFormikContext } from 'formik';
+import styles from './singupForm.module.css';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
+import ErrorText from '../ErrorText/ErrorText';
 
 const initialValues = {
   name: '',
@@ -35,80 +36,85 @@ const validationSchema = yup.object({
 });
 
 function SignupForm() {
-  const formik = useFormik({
-    initialValues,
-    onSubmit,
-    validationSchema,
-  });
+  // const formik = useFormik({
+  //   initialValues,
+  //   onSubmit,
+  //   validationSchema,
+  // });
 
   return (
-    <div className={styles.signupForm}>
-      <div className={styles.formContent}>
-        <h1>Регистрация</h1>
-        <span>Уже есть аккаунт? </span>
-        <span>
-          <a href="#">Войти</a>
-        </span>
-      </div>
-      <div className={styles.formContent}>
-        <form onSubmit={formik.handleSubmit}>
-          <div>
-            <label htmlFor="name">Имя</label>
-            <input
-              className={styles.inputField}
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Введите Ваше имя"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.name}
-            />
-            {formik.touched.name && formik.errors.name ? (
-              <div className={styles.error}>{formik.errors.name}</div>
-            ) : null}
-          </div>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+      
+    >
+      {(formik) => {
+        return (
+          <Form className={styles.signupForm}>
+            <div className={styles.formContent}>
+              <h1>Регистрация</h1>
+              <span>Уже есть аккаунт? </span>
+              <span>
+                <a href="#">Войти</a>
+              </span>
+            </div>
+            <div className={styles.formContent}>
+              <form onSubmit={formik.handleSubmit}>
+                <div>
+                  <label htmlFor="name">Имя</label>
+                  <input
+                    className={styles.inputField}
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder="Введите Ваше имя"
+                    {...formik.getFieldProps('name')}
+                  />
+                  {formik.touched.name && formik.errors.name ? (
+                    <div className={styles.error}>{formik.errors.name}</div>
+                  ) : null}
+                </div>
 
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              className={styles.inputField}
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Введите ваш email"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-            />
-            {formik.touched.email && formik.errors.email ? (
-              <div className={styles.error}>{formik.errors.email}</div>
-            ) : null}
-          </div>
+                <div>
+                  <label htmlFor="email">Email</label>
+                  <input
+                    className={styles.inputField}
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Введите ваш email"
+                    {...formik.getFieldProps('email')}
+                  />
+                  {formik.touched.email && formik.errors.email ? (
+                    <div className={styles.error}>{formik.errors.email}</div>
+                  ) : null}
+                </div>
 
-          <div>
-            <label htmlFor="phone">Номер телефона</label>
-            <input
-              className={styles.inputField}
-              id="phone"
-              name="phone"
-              type="tel"
-              placeholder="Введите номер телефона"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.phone}
-            />
-            {formik.touched.phone && formik.errors.phone ? (
-              <div className={styles.error}>{formik.errors.phone}</div>
-            ) : null}
-          </div>
+                <div>
+                  <label htmlFor="phone">Номер телефона</label>
+                  <input
+                    className={styles.inputField}
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="Введите номер телефона"
+                    {...formik.getFieldProps('phone')}
+                  />
+                  {formik.touched.phone && formik.errors.phone ? (
+                    <div className={styles.error}>{formik.errors.phone}</div>
+                  ) : null}
+                </div>
 
-          <button className={styles.btn} type="submit">
-            Зарегистрироваться
-          </button>
-        </form>
-      </div>
-    </div>
+                <button className={styles.btn} type="submit">
+                  Зарегистрироваться
+                </button>
+              </form>
+            </div>
+          </Form>
+        );
+      }}
+    </Formik>
 
     //   <div className={styles.signupForm}>
     //     <h1>Регистрация</h1>
