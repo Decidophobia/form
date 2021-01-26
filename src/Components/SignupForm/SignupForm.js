@@ -36,18 +36,12 @@ const validationSchema = yup.object({
 });
 
 function SignupForm() {
-  // const formik = useFormik({
-  //   initialValues,
-  //   onSubmit,
-  //   validationSchema,
-  // });
 
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
-      
     >
       {(formik) => {
         return (
@@ -60,56 +54,45 @@ function SignupForm() {
               </span>
             </div>
             <div className={styles.formContent}>
-              <form onSubmit={formik.handleSubmit}>
-                <div>
-                  <label htmlFor="name">Имя</label>
-                  <input
-                    className={styles.inputField}
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="Введите Ваше имя"
-                    {...formik.getFieldProps('name')}
-                  />
-                  {formik.touched.name && formik.errors.name ? (
-                    <div className={styles.error}>{formik.errors.name}</div>
-                  ) : null}
-                </div>
+              <div>
+                <label htmlFor="name">Имя</label>
+                <Field
+                  className={styles.inputField}
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Введите Ваше имя"
+                />
+                <ErrorMessage name="name" component={ErrorText} />
+              </div>
 
-                <div>
-                  <label htmlFor="email">Email</label>
-                  <input
-                    className={styles.inputField}
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="Введите ваш email"
-                    {...formik.getFieldProps('email')}
-                  />
-                  {formik.touched.email && formik.errors.email ? (
-                    <div className={styles.error}>{formik.errors.email}</div>
-                  ) : null}
-                </div>
+              <div>
+                <label htmlFor="email">Email</label>
+                <Field
+                  className={styles.inputField}
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="Введите ваш email"
+                />
+                <ErrorMessage name="email" component={ErrorText} />
+              </div>
 
-                <div>
-                  <label htmlFor="phone">Номер телефона</label>
-                  <input
-                    className={styles.inputField}
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    placeholder="Введите номер телефона"
-                    {...formik.getFieldProps('phone')}
-                  />
-                  {formik.touched.phone && formik.errors.phone ? (
-                    <div className={styles.error}>{formik.errors.phone}</div>
-                  ) : null}
-                </div>
+              <div>
+                <label htmlFor="phone">Номер телефона</label>
+                <Field
+                  className={styles.inputField}
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  placeholder="Введите номер телефона"
+                />
+                <ErrorMessage name="phone" component={ErrorText} />
+              </div>
 
-                <button className={styles.btn} type="submit">
-                  Зарегистрироваться
-                </button>
-              </form>
+              <button className={styles.btn} type="submit" disabled={!(formik.dirty && formik.isValid)}>
+                Зарегистрироваться
+              </button>
             </div>
           </Form>
         );

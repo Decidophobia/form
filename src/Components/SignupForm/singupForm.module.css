@@ -40,20 +40,26 @@ label {
   color: rgba(124, 156, 191, 1);
 }
 
-/* inactive */
+
 .btn {
   margin-top: 20px;
-  width: 409px;
-  height: 56.57px;
-  box-shadow: 0px 4px 8px rgba(44, 39, 56, 0.08);
+  width: 408px;
+  height: 56px;
+  box-shadow: 0px 2px 4px rgba(44, 39, 56, 0.08),
+  0px 4px 8px rgba(44, 39, 56, 0.08);
   border-radius: 6px;
-  text-align: center;
-  background-color: rgba(219, 226, 234, 1), 100%;
-  color:rgba(177, 181, 191, 1);
+  background-color: rgba(8, 128, 174, 1);
+  color: rgba(235, 244, 248, 1);
   border: none;
 }
 
+/* inactive */
+.btnInactive {
+  background-color: rgba(219, 226, 234, 1), 100%;
+  color: rgba(177, 181, 191, 1); 
+}
+
 .error {
-  color:rgba(255, 113, 113, 1);
+  color: rgba(255, 113, 113, 1);
   font-size: 14px;
 }
