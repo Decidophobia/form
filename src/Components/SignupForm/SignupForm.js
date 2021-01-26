@@ -14,9 +14,24 @@ const onSubmit = (values) => {
 };
 
 const validationSchema = yup.object({
-  name: yup.string().required('Required!'),
-  email: yup.string().email('Invalid email format!').required('Required!'),
-  phone: yup.number().required('Required'),
+  name: yup
+    .string()
+    .matches(/^[а-яёА-ЯЁa-zA-Z]+(?:[\s|-][а-яёА-ЯЁa-zA-Z]+)*$/, {
+      message: 'Имя не может содержать цифры и символы кроме пробела и дефиса',
+      excludeEmptyString: true,
+    })
+    .required('* это поле обязательное'),
+  email: yup
+    .string()
+    .email('Введено некорректное значение')
+    .required('* это поле обязательное'),
+  phone: yup
+    .string()
+    .matches(
+      /^(\+7|8)[\-\(]?\(?[489][0-9]{2}\)?[\-]?[0-9]{3}[\-]?[0-9]{2}[\-]?[0-9]{2}$/,
+      { message: 'Введено некорректное значение', excludeEmptyString: true }
+    )
+    .required('* это поле обязательное'),
 });
 
 function SignupForm() {
@@ -28,18 +43,19 @@ function SignupForm() {
 
   return (
     <div className={styles.signupForm}>
-         <div className={styles.formContent}>
-          <h1>Регистрация</h1>
-          <span>Уже есть аккаунт? </span>
-          <span><a href="#">Войти</a>
-          </span>
-         </div>
+      <div className={styles.formContent}>
+        <h1>Регистрация</h1>
+        <span>Уже есть аккаунт? </span>
+        <span>
+          <a href="#">Войти</a>
+        </span>
+      </div>
       <div className={styles.formContent}>
         <form onSubmit={formik.handleSubmit}>
-
           <div>
             <label htmlFor="name">Имя</label>
-            <input className={styles.inputField}
+            <input
+              className={styles.inputField}
               id="name"
               name="name"
               type="text"
@@ -55,7 +71,8 @@ function SignupForm() {
 
           <div>
             <label htmlFor="email">Email</label>
-            <input className={styles.inputField}
+            <input
+              className={styles.inputField}
               id="email"
               name="email"
               type="email"
@@ -71,7 +88,8 @@ function SignupForm() {
 
           <div>
             <label htmlFor="phone">Номер телефона</label>
-            <input className={styles.inputField}
+            <input
+              className={styles.inputField}
               id="phone"
               name="phone"
               type="tel"
