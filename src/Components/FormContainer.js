@@ -1,13 +1,21 @@
 import React from 'react';
-import styles from './singupForm.module.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-import ErrorText from '../ErrorText/ErrorText';
+import ErrorText from './ErrorText';
+
+const dropdownOptions = [
+  {key: 'Язык', value: ''},
+  {key: 'Русский', value: 'russian'},
+  {key: 'Английский', value: 'english'},
+  {key: 'Китайский', value: 'chinese'},
+  {key: 'Испанский', value: 'spanish'},
+]
 
 const initialValues = {
   name: '',
   email: '',
   phone: '',
+  selectOption: '',
 };
 
 const onSubmit = (values) => {
@@ -33,9 +41,10 @@ const validationSchema = yup.object({
       { message: 'Введено некорректное значение', excludeEmptyString: true }
     )
     .required('* это поле обязательное'),
+    selectOption: yup.string().required('* это поле обязательное'),
 });
 
-function SignupForm() {
+function FormContainer() {
 
   return (
     <Formik
@@ -45,19 +54,19 @@ function SignupForm() {
     >
       {(formik) => {
         return (
-          <Form className={styles.signupForm}>
-            <div className={styles.formContent}>
+          <Form className="signupForm">
+            <div className="formContent">
               <h1>Регистрация</h1>
               <span>Уже есть аккаунт? </span>
               <span>
                 <a href="#">Войти</a>
               </span>
             </div>
-            <div className={styles.formContent}>
+            <div className="formContent">
               <div>
                 <label htmlFor="name">Имя</label>
                 <Field
-                  className={styles.inputField}
+                  className="inputField"
                   id="name"
                   name="name"
                   type="text"
@@ -69,7 +78,7 @@ function SignupForm() {
               <div>
                 <label htmlFor="email">Email</label>
                 <Field
-                  className={styles.inputField}
+                  className="inputField"
                   id="email"
                   name="email"
                   type="email"
@@ -81,7 +90,7 @@ function SignupForm() {
               <div>
                 <label htmlFor="phone">Номер телефона</label>
                 <Field
-                  className={styles.inputField}
+                  className="inputField"
                   id="phone"
                   name="phone"
                   type="tel"
@@ -89,8 +98,8 @@ function SignupForm() {
                 />
                 <ErrorMessage name="phone" component={ErrorText} />
               </div>
-
-              <button className={styles.btn} type="submit" disabled={!(formik.dirty && formik.isValid)}>
+         
+              <button className="btn" type="submit" disabled={!(formik.dirty && formik.isValid)}>
                 Зарегистрироваться
               </button>
             </div>
@@ -99,39 +108,7 @@ function SignupForm() {
       }}
     </Formik>
 
-    //   <div className={styles.signupForm}>
-    //     <h1>Регистрация</h1>
-    //     <span>Уже есть аккаунт?</span>
-    //     <span>
-    //       <a href="#">Войти</a>
-    //     </span>
-    //     <form>
-    //       <div>Имя</div>
-    //       <input
-    //         required
-    //         className={styles.inputField}
-    //         type="text"
-    //         placeholder="Введите Ваше имя"
-    //         pattern="^[а-яёА-ЯЁa-zA-Z]+(?:[\s|-][а-яёА-ЯЁa-zA-Z]+)*$"
-    //       />
-    //       <div>Email</div>
-    //       <input
-    //         required
-    //         type="email"
-    //         className={styles.inputField}
-    //         type="email"
-    //         placeholder="Введите ваш email"
-    //       />
-    //       <div>Номер телефона</div>
-    //       <input
-    //         required
-    //         className={styles.inputField}
-    //         type="tel"
-    //         pattern="^(\+7|8)[\-\(]?\(?[489][0-9]{2}\)?[\-]?[0-9]{3}[\-]?[0-9]{2}[\-]?[0-9]{2}$"
-    //         type="text"
-    //         placeholder="Введите номер телефона"
-    //       />
-
+    //  
     //       <div>Язык</div>
     //       <select className={styles.inputField}>
     //         <option selected disabled hidden>
@@ -156,4 +133,4 @@ function SignupForm() {
   );
 }
 
-export default SignupForm;
+export default FormContainer;
