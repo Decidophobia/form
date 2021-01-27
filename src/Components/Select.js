@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, ErrorMessage } from 'formik';
+import ErrorText from './ErrorText';
 
 function Select(props) {
   const { label, name, options, ...rest } = props;
@@ -15,7 +16,7 @@ function Select(props) {
           );
         })}
       </Field>
-      <ErrorMessage name={name} component={TextError} />
+      <ErrorMessage name={name} component={ErrorText} />
     </div>
   );
 }
