@@ -4,6 +4,7 @@ import ErrorText from './ErrorText';
 
 function Select(props) {
   const { label, name, options, ...rest } = props;
+
   return (
     <div className="formContent">
       <label htmlFor={name}>{label}</label>

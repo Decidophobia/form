@@ -5,7 +5,7 @@ import ErrorText from './ErrorText';
 function Checkbox(props) {
   const { label, name, options, ...rest } = props;
   return (
-    <div className="formContent">
+    <div className="checkboxField">
       <label name={name}>{label}</label>
       <Field name={name} {...rest}>
         {({ field }) => {
@@ -19,7 +19,7 @@ function Checkbox(props) {
                   value={option.value}
                   checked={field.value.includes(option.value)}
                 />
-                <label htmlFor={option.value}>{option.key}</label>
+                <label htmlFor={option.value}>Принимаю <a href="##">условия</a> использования</label>
               </React.Fragment>
             );
           });

@@ -17,6 +17,9 @@ a {
   text-decoration: none;
 }
 .signupForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   height: 789px;
   width: 460px;
   background-color: rgba(255, 255, 255, 1);
@@ -25,7 +28,36 @@ a {
 }
 
 .formContent {
-  margin: 40px 20px 40px 20px;
+  align-self: center;
+}
+
+.head {
+  margin-left: 30px;
+}
+
+.checkboxField {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-self: start;
+  margin-left: 30px;
+}
+
+.checkboxField .error {
+  width: 100%;
+}
+
+.checkboxField a {
+  padding: 0 5px;
+}
+input[type='checkbox'] {
+  width: 28px;
+  height: 28px;
+  background: #ffffff;
+  border: 1px solid #dbe2ea;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 8px rgba(44, 39, 56, 0.04);
+  border-radius: 4px;
 }
 
 label {
@@ -34,7 +66,7 @@ label {
   font-size: 16px;
   line-height: 21px;
   display: flex;
-  margin-bottom: 5px;
+  margin-left: 5px;
 }
 
 .inputField {
@@ -42,8 +74,7 @@ label {
   width: 400px;
   border: 1px solid rgba(135, 143, 153, 0.23);
   border-radius: 6px;
-  margin-top: 7px;
-  margin-bottom: 8px;
+  text-indent: 15px;
 }
 
 select {
@@ -55,17 +86,16 @@ select {
   box-shadow: 0px 4px 8px rgba(44, 39, 56, 0.04);
   border-radius: 6px;
 }
+option:first-child {
+  display: none;
+}
 
 ::placeholder {
   color: rgba(124, 156, 191, 1);
 }
 
-option:hover {
-  background-color: rgba(235, 244, 248, 1);
-}
-
 button {
-  margin: 40px 20px 40px 20px;
+  align-self: center;
   width: 408px;
   height: 56px;
   box-shadow: 0px 2px 4px rgba(44, 39, 56, 0.08),
@@ -79,13 +109,13 @@ button {
 /* inactive */
 button:disabled,
 button[disabled] {
-  margin: 40px 20px 40px 20px;
+  align-self: center;
   width: 408px;
   height: 56px;
   border-radius: 6px;
   box-shadow: 0px 2px 4px rgba(44, 39, 56, 0.08),
     0px 4px 8px rgba(44, 39, 56, 0.08);
-  background-color: rgba(219, 226, 234, 1), 100%;
+  background: rgba(219, 226, 234, 1);
   color: rgba(177, 181, 191, 1);
   border: none;
 }

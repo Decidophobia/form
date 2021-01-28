@@ -1,8 +1,7 @@
 import React from 'react';
-import { Formik, Form, ErrorMessage, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import * as yup from 'yup';
 import FormControl from './FormControl';
-import ErrorText from './ErrorText';
 
 function FormContainer() {
   const dropdownOptions = [
@@ -12,13 +11,15 @@ function FormContainer() {
     { key: 'Китайский', value: 'chinese' },
     { key: 'Испанский', value: 'spanish' },
   ];
-
+  const checkboxOptions = [
+    { key: 'Принимаю условия использования', value: 'cOption1' },
+  ];
   const initialValues = {
     name: '',
     email: '',
     phone: '',
     selectOption: '',
-    acceptTerms: false,
+    checkboxOption: [],
   };
 
   const onSubmit = (values) => {
@@ -46,7 +47,7 @@ function FormContainer() {
       )
       .required('* это поле обязательное'),
     selectOption: yup.string().required('* это поле обязательное'),
-    acceptTerms: yup.bool().oneOf([true], 'Примите условия использования'),
+    checkboxOption: yup.array().min(1, 'Примите условия использования'),
   });
   return (
     <Formik
@@ -56,11 +57,10 @@ function FormContainer() {
     >
       {(formik) => (
         <Form className="signupForm">
-          <div className="formContent">
+          <div className="head">
             <h1>Регистрация</h1>
-            <span>Уже есть аккаунт? </span>
             <span>
-              <a href="#">Войти</a>
+              Уже есть аккаунт? <a href="#">Войти</a>
             </span>
           </div>
 
@@ -95,17 +95,12 @@ function FormContainer() {
             name="selectOption"
             options={dropdownOptions}
           />
-
-          <div className="formContent">
-            <Field as="checkbox" name="acceptTerms">
-              <input type="checkbox"></input>
-              <label htmlFor="acceptTerms">
-                Принимаю условия использования
-              </label>
-            </Field>
-            <ErrorMessage name="acceptTerms" component={ErrorText} />
-          </div>
-
+          <FormControl
+            control="checkbox"
+            label={false}
+            name="checkboxOption"
+            options={checkboxOptions}
+          />
           <button type="submit" disabled={!(formik.dirty && formik.isValid)}>
             Зарегистрироваться
           </button>
